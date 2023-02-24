@@ -215,3 +215,122 @@ if (typeof window.DmbgeoForm != 'function') {
         });
     });
 }
+
+if (typeof window.ajax != 'function') {
+    window.ajax = async function (url, params = {}, method = "POST", headers = {}) {
+        let data = new FormData;
+        data.append('AJAX_MODE', 'Y');
+
+        if (typeof params == 'object') {
+            for (let key in params) {
+                if (typeof params[key] == 'object') {
+                    for (let key2 in params[key]) {
+                        data.append(key, params[key][key2]);
+                    }
+                }
+                else {
+                    data.append(key, params[key]);
+                }
+            }
+
+        }
+
+        let response = await fetch(url, {
+            method: method,
+            headers: headers,
+            body: data
+        });
+
+
+        if (response.ok) {
+            return await response.text();
+        } else {
+            console.error("Ошибка HTTP: " + response.status);
+            return null;
+        }
+    }
+}
+if (typeof window.ajaxJson != 'function') {
+    window.ajaxJson = async function (url, params = {}, method = "POST", headers = {}) {
+        let data = new FormData;
+        data.append('AJAX_MODE', 'Y');
+        if (typeof params == 'object') {
+            for (let key in params) {
+                if (typeof params[key] == 'object') {
+                    for (let key2 in params[key]) {
+                        data.append(key, params[key][key2]);
+                    }
+                }
+                else {
+                    data.append(key, params[key]);
+                }
+            }
+
+        }
+
+        let response = await fetch(url, {
+            method: method,
+            headers: headers,
+            body: data
+        });
+
+
+        if (response.ok) {
+            return await response.json();
+        } else {
+            console.error("Ошибка HTTP: " + response.status);
+            return null;
+        }
+    }
+}
+if (typeof window.getFormParam != 'function') {
+    window.getFormParam = function (form, merge = {}) {
+        let formData = {};
+        if (form) {
+            let formArray = form.serializeArray();
+            formArray.forEach(element => {
+                if (formData.hasOwnProperty(element.name)) {
+                    if (typeof formData[element.name] == 'string') {
+                        let value = formData[element.name];
+                        formData[element.name] = [];
+                        formData[element.name].push(value);
+                    }
+
+                    formData[element.name].push(element.value);
+
+                }
+                else {
+                    formData[element.name] = element.value;
+                }
+            });
+
+        }
+        for (let key in merge) {
+            formData[key] = merge[key];
+        }
+
+        return formData;
+    }
+}
+if (typeof trim != 'function') {
+    function trim(value) { return $.trim(value); };
+}
+if (typeof isJson != 'function') {
+    function isJson(str) {
+        try {
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return JSON.parse(str);
+    }
+}
+
+if (typeof getParameterByName != 'function') {
+    function getParameterByName(name) {
+        var name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+        var results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+}
