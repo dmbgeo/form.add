@@ -41,6 +41,9 @@ class CBitrixBasketComponent extends CBitrixComponent
         if (empty($params['POPUP_RESULT_ID'])) {
             $params['POPUP_RESULT_ID'] = $params['POPUP_ID'];
         }
+        if (empty($params['POPUP_CORE'])) {
+            $params['POPUP_CORE'] = 'fancybox';
+        }
         return $params;
     }
 

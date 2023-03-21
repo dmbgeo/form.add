@@ -117,6 +117,18 @@ $arComponentParameters = array(
 			"PARENT" => "FORM_FIELDS",
 		),
 
+		"POPUP_CORE" => array(
+			"NAME" => GetMessage("POPUP_CORE"),
+			"TYPE" => "LIST",
+			"MULTIPLE" => "N",
+			"VALUES" => [
+				'fancybox' => 'fancybox',
+				'bootstrap' => 'bootstrap',
+			],
+			"DEFAULT" => "fancybox",
+			"PARENT" => "FORM_FIELDS",
+		),
+
 		"IBLOCK_ELEMENT" => array(
 			"NAME" => GetMessage("IBLOCK_ELEMENT"),
 			"TYPE" => "STRING",

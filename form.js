@@ -26,12 +26,15 @@ if (typeof window.DmbgeoForm != 'function') {
                     if ($("#" + old_form_id).length > 0) {
                         $("#" + old_form_id)[0].reset();
                     }
+
                     $("#" + old_form_id).trigger("DmbgeoFormSuccess", [this]);
                     if (this.params['PARAMS']['IS_POPUP_RESULT'] == 'Y') {
                         this.setPopupBody(result.html, this.params.VIEW['POPUP_RESULT_ID']);
-                        if (this.params['PARAMS']['IS_POPUP_FORM'] != 'Y') {
+                        console.log('dda');
+                        if (this.params['PARAMS']['IS_POPUP_FORM'] != 'Y' || (this.params['PARAMS']['IS_POPUP_FORM'] == 'Y' && this.params['PARAMS']['POPUP_RESULT_ID'] != this.params['PARAMS']['POPUP_ID'])) {
                             this.popup(this.params.VIEW['POPUP_RESULT_ID'], false);
                         }
+        
                     }
                     else {
                         this.setContainerBody(result.html);
@@ -86,13 +89,22 @@ if (typeof window.DmbgeoForm != 'function') {
         },
 
         popup: function (popup_id, modal = false) {
-            $.fancybox.close();
-            $.fancybox.open({
-                src: '#' + popup_id,
-                modal: modal,
-                touch: false
 
-            });
+            if (this.params['PARAMS']['POPUP_CORE'] == 'bootstrap') {
+
+                $('.modal').modal('hide');
+                $('#' + popup_id).modal('show');
+            }
+            if (this.params['PARAMS']['POPUP_CORE'] == 'fancybox') {
+                $.fancybox.close();
+                $.fancybox.open({
+                    src: '#' + popup_id,
+                    modal: modal,
+                    touch: false
+
+                });
+            }
+
 
             $("#" + this.params.VIEW['FORM_ID']).trigger("DmbgeoFormPopupShow", [this]);
         },

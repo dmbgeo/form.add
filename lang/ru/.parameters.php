@@ -10,6 +10,8 @@ $MESS['FORM_FIELDS_ERROR_MESSAGE_GROUP'] = "Настройка ошибки ва
 $MESS['FORM_ID'] = "Выберите форму";
 $MESS['FORM_FIELDS_ID'] = "Выберите поля формы";
 $MESS['FORM_IBLOCK_ELEMENT'] = "Привязка элемента инфоблока";
+$MESS['POPUP_CORE'] = "Попап модуль";
+
 $MESS['IBLOCK_ELEMENT'] = "Элемента инфоблока";
 $MESS['POPUP_ID'] = "Ид попапа";
 $MESS['POPUP_RESULT_ID'] = "Ид попапа результата";
